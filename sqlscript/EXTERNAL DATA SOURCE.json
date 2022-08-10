@@ -1,0 +1,17 @@
+{
+	"name": "EXTERNAL DATA SOURCE",
+	"properties": {
+		"content": {
+			"query": "USE MASTER\nGO\n\n\nCREATE DATABASE nyc_taxi_ldw\nGO\n\nUSE nyc_taxi_ldw\nGO\n\nCREATE EXTERNAL DATA SOURCE nyc_taxi_data_raw\nWITH(\n    LOCATION = 'https://lmman724store.dfs.core.windows.net/nyc-taxi-sysnapse-storage'\n)\n\nCREATE SCHEMA bronze\nGO\n\nCREATE SCHEMA silver\nGO\n\nCREATE SCHEMA gold\nGO",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "nyc_taxi_ldw",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
