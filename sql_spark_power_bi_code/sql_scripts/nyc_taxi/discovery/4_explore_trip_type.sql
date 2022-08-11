@@ -1,9 +1,9 @@
-USE nyc_taxi_discovery;
+USE nyc_taxi_ldw;
 
 SELECT *
   FROM OPENROWSET(
-      BULK 'trip_type.tsv',
-      DATA_SOURCE = 'nyc_taxi_data_raw',
+      BULK 'raw/trip_type.tsv',
+      DATA_SOURCE = 'nyc_taxi_src',
       FORMAT = 'CSV',
       PARSER_VERSION = '2.0',
       HEADER_ROW = TRUE,

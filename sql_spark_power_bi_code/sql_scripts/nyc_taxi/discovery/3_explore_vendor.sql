@@ -13,7 +13,7 @@ SELECT *
 SELECT *
   FROM OPENROWSET(
       BULK 'vendor_escaped.csv',
-      DATA_SOURCE = 'nyc_taxi_data_raw',
+      DATA_SOURCE = 'nyc_taxi_src',
       FORMAT = 'CSV',
       PARSER_VERSION = '2.0',
       HEADER_ROW = TRUE,
@@ -23,7 +23,7 @@ SELECT *
 SELECT *
   FROM OPENROWSET(
       BULK 'vendor.csv',
-      DATA_SOURCE = 'nyc_taxi_data_raw',
+      DATA_SOURCE = 'nyc_taxi_src',
       FORMAT = 'CSV',
       PARSER_VERSION = '2.0',
       HEADER_ROW = TRUE,

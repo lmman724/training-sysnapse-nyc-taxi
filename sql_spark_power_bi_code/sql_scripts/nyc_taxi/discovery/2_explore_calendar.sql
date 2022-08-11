@@ -3,7 +3,7 @@ USE nyc_taxi_discovery;
 SELECT *
   FROM OPENROWSET(
       BULK 'calendar.csv',
-      DATA_SOURCE = 'nyc_taxi_data_raw',
+      DATA_SOURCE = 'nyc_taxi_src',
       FORMAT = 'CSV',
       PARSER_VERSION = '2.0',
       HEADER_ROW = TRUE
@@ -12,7 +12,7 @@ SELECT *
 EXEC sp_describe_first_result_set N'SELECT *
   FROM OPENROWSET(
       BULK ''calendar.csv'',
-      DATA_SOURCE = ''nyc_taxi_data_raw'',
+      DATA_SOURCE = ''nyc_taxi_src'',
       FORMAT = ''CSV'',
       PARSER_VERSION = ''2.0'',
       HEADER_ROW = TRUE
@@ -22,7 +22,7 @@ EXEC sp_describe_first_result_set N'SELECT *
 SELECT *
   FROM OPENROWSET(
       BULK 'calendar.csv',
-      DATA_SOURCE = 'nyc_taxi_data_raw',
+      DATA_SOURCE = 'nyc_taxi_src',
       FORMAT = 'CSV',
       PARSER_VERSION = '2.0',
       HEADER_ROW = TRUE
