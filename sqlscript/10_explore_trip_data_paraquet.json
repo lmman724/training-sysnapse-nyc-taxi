@@ -1,0 +1,20 @@
+{
+	"name": "10_explore_trip_data_paraquet",
+	"properties": {
+		"folder": {
+			"name": "Discovery"
+		},
+		"content": {
+			"query": "SELECT TOP 100 *\n  FROM OPENROWSET (\n      BULK 'raw/trip_data_green_parquet/year=2020/month=01/*.parquet',\n      DATA_SOURCE = 'nyc_taxi_data_raw',\n      FORMAT = 'PARQUET'\n  ) AS trip_data",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "nyc_taxi_ldw",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
