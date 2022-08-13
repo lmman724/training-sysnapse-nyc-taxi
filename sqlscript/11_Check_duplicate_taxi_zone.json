@@ -1,0 +1,20 @@
+{
+	"name": "11_Check_duplicate_taxi_zone",
+	"properties": {
+		"folder": {
+			"name": "Discovery"
+		},
+		"content": {
+			"query": "-- Check for duplicates in the Taxi Zone data\n\nSELECT\n    location_id,\n    COUNT(1) AS number_of_records\nFROM\n    OPENROWSET(\n        BULK 'raw/taxi_zone.csv',\n        DATA_SOURCE = 'nyc_taxi_data_raw',\n        FORMAT = 'CSV',\n        PARSER_VERSION = '2.0',\n        FIRSTROW = 2,\n        FIELDTERMINATOR = ',',\n        ROWTERMINATOR = '\\n'\n    ) \n    WITH (\n        location_id SMALLINT 1,\n        borough VARCHAR(15) 2,\n        zone VARCHAR(50) 3,\n        service_zone VARCHAR(15) 4\n    )AS [result]\nGROUP BY location_id\nHAVING COUNT(1) = 1;\n\n\nSELECT\n    borough,\n    COUNT(1) AS number_of_records\nFROM\n    OPENROWSET(\n        BULK 'raw/taxi_zone.csv',\n        DATA_SOURCE = 'nyc_taxi_data_raw',\n        FORMAT = 'CSV',\n        PARSER_VERSION = '2.0',\n        FIRSTROW = 2,\n        FIELDTERMINATOR = ',',\n        ROWTERMINATOR = '\\n'\n    ) \n    WITH (\n        location_id SMALLINT 1,\n        borough VARCHAR(15) 2,\n        zone VARCHAR(50) 3,\n        service_zone VARCHAR(15) 4\n    )AS [result]\nGROUP BY borough\nHAVING COUNT(1) > 1;",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "nyc_taxi_ldw",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
