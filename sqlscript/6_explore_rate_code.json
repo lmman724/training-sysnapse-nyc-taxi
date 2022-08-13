@@ -5,7 +5,7 @@
 			"name": "Discovery"
 		},
 		"content": {
-			"query": "USE nyc_taxi_ldw;\n\nSELECT CAST(JSON_VALUE(jsonDoc, '$.rate_code_id') AS SMALLINT) rate_code_id,\n        CAST(JSON_VALUE(jsonDoc, '$.rate_code') AS VARCHAR(15)) rate_code\n  FROM OPENROWSET(\n      BULK 'raw/rate_code.json',\n      DATA_SOURCE = 'nyc_taxi_src',\n      FORMAT = 'CSV',\n      PARSER_VERSION = '1.0', \n      FIELDTERMINATOR = '0x0b',\n      FIELDQUOTE = '0x0b',\n      ROWTERMINATOR = '0x0a'\n  )\n  WITH\n  (\n      jsonDoc NVARCHAR(MAX)\n  ) AS rate_code;\n",
+			"query": " SELECT rate_code_id, rate_code\n  FROM OPENROWSET(\n      BULK 'raw/rate_code_multi_line.json',\n      DATA_SOURCE = 'nyc_taxi_data_raw',\n      FORMAT = 'CSV',\n      FIELDTERMINATOR = '0x0b',\n      FIELDQUOTE = '0x0b',\n      ROWTERMINATOR = '0x0b'\n  )\n  WITH\n  (\n      jsonDoc NVARCHAR(MAX)\n  ) AS rate_code\n  CROSS APPLY OPENJSON(jsonDoc)\n  WITH(\n      rate_code_id TINYINT,\n      rate_code VARCHAR(20) \n  );\n",
 			"metadata": {
 				"language": "sql"
 			},
