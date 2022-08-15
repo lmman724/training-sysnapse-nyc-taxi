@@ -1,0 +1,69 @@
+{
+	"name": "ds_silver_calendar",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lmman_test_linkserive",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "silver/calendar",
+				"container": "nyc-taxi-sysnapse-storage"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "date_key",
+				"type": "INT_32"
+			},
+			{
+				"name": "date",
+				"type": "DATE"
+			},
+			{
+				"name": "year",
+				"type": "INT_16"
+			},
+			{
+				"name": "month",
+				"type": "UINT_8"
+			},
+			{
+				"name": "day",
+				"type": "UINT_8"
+			},
+			{
+				"name": "day_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "day_of_year",
+				"type": "INT_16"
+			},
+			{
+				"name": "week_of_month",
+				"type": "UINT_8"
+			},
+			{
+				"name": "week_of_year",
+				"type": "UINT_8"
+			},
+			{
+				"name": "month_name",
+				"type": "UTF8"
+			},
+			{
+				"name": "year_month",
+				"type": "INT_32"
+			},
+			{
+				"name": "year_week",
+				"type": "INT_32"
+			}
+		]
+	}
+}
